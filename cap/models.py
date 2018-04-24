@@ -14,7 +14,7 @@ class Ocorrencia(models.Model):
     ## Perguntas primarias
     data_ocorrencia = models.DateTimeField() # 9
     nome = models.CharField(max_length=100, help_text='Informe o nome do paciente') # 10
-    data_nascimento = models.DateField(auto_now_add=False) # 11
+    data_nascimento = models.DateField() # 11
     gestante = models.CharField(max_length=100, choices=CH_GESTANTE)  # 14
     raca_cor = models.CharField(max_length=100, choices=CH_RACA_COR) # 15
     municipio_residencia = models.CharField(max_length=100, help_text='Informe seu endereço') # 20
@@ -25,7 +25,7 @@ class Ocorrencia(models.Model):
     bairro_ocorrencia = models.CharField(max_length=100, help_text='Informe o bairro') # 43
     logradouro_ocorrencia = models.CharField(max_length=100, help_text='Informe a rua/avenida') # 44
     numero_ocorrencia = models.PositiveIntegerField(verbose_name='Número') # 45
-    hora_ocorrencia = models.CharField(max_length=5, help_text='(00:00 - 23:59') # 51
+    hora_ocorrencia = models.CharField(max_length=5, help_text='(00:00 - 23:59)') # 51
     local_ocorrencia = models.CharField(max_length=100, choices=CH_LOCAL) # 52
     local_ocorrencia_outros = models.CharField(max_length=200, verbose_name='Outros', blank=True, null=True) # 52 complemento
     reicidencia = models.CharField(max_length=100, verbose_name='Ocorreu outras vezes?', choices=CH_SIM_NAO) # 53
@@ -35,7 +35,7 @@ class Ocorrencia(models.Model):
     tipo_violencia = models.CharField(max_length=100, help_text='Informe o tipo de violência', choices=CH_TIPO_VIOLENCIA) # 56
     meio_agressao = models.CharField(max_length=200, verbose_name='Meio de agressão', choices=CH_MEIO_AGRESSAO) # 57
     meio_agressao_outros =  models.CharField(max_length=200, verbose_name='Outros', blank=True, null=True) # 57 complemento
-    tipo_violencia_sexual = models.CharField(max_length=200, choices=CH_TIPO_VIOLENCIA_SEXUAL, verbose_name='Se ocorreu violência secual, qual o tipo?') # 58
+    tipo_violencia_sexual = models.CharField(max_length=200, choices=CH_TIPO_VIOLENCIA_SEXUAL, verbose_name='Se ocorreu violência sexual, qual o tipo?') # 58
     tipo_violencia_sexual_outros = models.CharField(max_length=200, verbose_name='Outros', blank=True, null=True) # 58 complemento
     procedimento_realizado = models.CharField(max_length=100, choices=CH_PROCEDIMENTO) # 59
     numero_envolvidos = models.CharField(max_length=40, verbose_name='Número de envolvidos', choices=CH_ENVOLVIDOS) # 60
@@ -48,7 +48,7 @@ class Ocorrencia(models.Model):
     tipo_notificacao = models.CharField(max_length=100, verbose_name='Tipo de notificação', blank=True, null=True)
     agravo_doenca =  models.CharField(max_length=100, verbose_name='Agravo/doença', blank=True, null=True)
     codigo_cid10 = models.CharField(max_length=100, verbose_name='Código (CID10', blank=True, null=True)
-    Data_notificacao = models.DateField(auto_now_add=True, blank=True, null=True)
+    data_notificacao = models.DateField(blank=True, null=True)
     uf_notificacao = models.CharField(verbose_name='UF (Notificação)', max_length=2, blank=True, null=True)
     municipio_notificacao = models.CharField(max_length=200, blank=True, null=True)
     codigo_ibge_notificacao = models.CharField(max_length=100, verbose_name='Código (IBGE) (Notificacao)', blank=True, null=True)
@@ -66,14 +66,14 @@ class Ocorrencia(models.Model):
     codigo_ibge_residencia = models.CharField(max_length=6, verbose_name='Código (IBGE) (Residência)', blank=True, null=True)
     distrito = models.CharField(max_length=200, blank=True, null=True)
     codigo = models.CharField(max_length=6, verbose_name='Código', blank=True, null=True)
-    complemento = models.CharField(max_length=200, verbose_name='Complemento (apto, casa, ...', blank=True, null=True)
+    complemento = models.CharField(max_length=200, verbose_name='Complemento(apto, casa) ', blank=True, null=True)
     geo_campo1 = models.CharField(max_length=100, verbose_name='Geo campo 1', blank=True, null=True)
     geo_campo2 = models.CharField(max_length=100, verbose_name='Geo campo 2', blank=True, null=True)
     ponto_referencia = models.CharField(max_length=200, verbose_name='Ponto de Referência', blank=True, null=True)
     cep = models.CharField(max_length=7, verbose_name='CEP', blank=True, null=True)
     telefone = models.CharField(max_length=10, blank=True, null=True)
     zona_moradia = models.CharField(max_length=20, verbose_name='Zona', choices=CH_ZONA, blank=True, null=True)
-    pais_residencia = models.CharField(max_length=100, verbose_name='País (se residente fora do Brasil', blank=True, null=True)
+    pais_residencia = models.CharField(max_length=100, verbose_name='País (se residente fora do Brasil)', blank=True, null=True)
 
     ## Dados complementares
     nome_social = models.CharField(max_length=100, blank=True, null=True)
@@ -87,12 +87,12 @@ class Ocorrencia(models.Model):
     codigo_ibge_ocorrencia = models.CharField(max_length=6, verbose_name='Código (IBGE) (Ocorrência)', blank=True, null=True)
     distrito_ocorrencia = models.CharField(max_length=100, blank=True, null=True)
     codigo_ocorrencia = models.CharField(max_length=6,  verbose_name='Código', blank=True, null=True)
-    complemento_ocorrencia = models.CharField(max_length=100, verbose_name='Complemento (apto, casa, ...)', blank=True, null=True)
+    complemento_ocorrencia = models.CharField(max_length=100, verbose_name='Complemento(apto, casa)', blank=True, null=True)
     geo_campo3 = models.CharField(max_length=100, verbose_name='Geo campo 3', blank=True, null=True)
     geo_campo4 = models.CharField(max_length=100, verbose_name='Geo campo 4', blank=True, null=True)
     ponto_referencia_ocorrencia = models.CharField(max_length=200, verbose_name='Ponto de referência', blank=True, null=True)
     zona_ocorrencia = models.CharField(max_length=100, verbose_name='Zona', choices=CH_ZONA_OCORRENCIA, blank=True, null=True)
-    idade_agressor = models.CharField(max_length=100, verbose_name=CH_IDADE_AGRESSOR, blank=True, null=True)
+    idade_agressor = models.CharField(max_length=100,verbose_name='Ciclo de vida do provável autor da violência', choices=CH_IDADE_AGRESSOR, blank=True, null=True)
     violencia_trabalho = models.CharField(max_length=20, verbose_name='Violência Relacionada ao Trabalho', choices=CH_SIM_NAO_I, blank=True, null=True)
     violencia_trabalho_se_sim = models.CharField(max_length=20, verbose_name='Se sim, foi emitida a Comunicaçao de Acidente de Trabalho (CAT)', choices=CH_SIM_NAO_NAOAPLICA_I, blank=True, null=True)
     circunstancia_lesao = models.CharField(max_length=5, verbose_name='Circunstâncias da lesão', help_text='CID 10 - Cap XX', blank=True, null=True)

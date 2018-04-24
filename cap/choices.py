@@ -88,11 +88,11 @@ CH_MEIO_AGRESSAO = [
 ]
 
 CH_TIPO_VIOLENCIA_SEXUAL = [
-    ('','Assédio sexual'),
-    ('','Estupro'),
-    ('','Pornografia infantil'),
-    ('','Exploração sexual'),
-    ('','Outros')
+    ('1','Assédio sexual'),
+    ('2','Estupro'),
+    ('3','Pornografia infantil'),
+    ('4','Exploração sexual'),
+    ('9','Outros')
 ]
 
 CH_PROCEDIMENTO = [
@@ -223,7 +223,7 @@ CH_IDADE_AGRESSOR = [
     ('1','Criança (0 a 9 anos)'),
     ('2','Adolecente (10 a 19 anos)'),
     ('3','Jovem (20 a 24 anos)'),
-    ('4','Pessoa adulta (25 a 59 anos'),
-    ('5','Pessoa idosa ( 60 anos ou mais'),
+    ('4','Pessoa adulta (25 a 59 anos)'),
+    ('5','Pessoa idosa ( 60 anos ou mais)'),
     ('9','Ignorado'),
 ]
