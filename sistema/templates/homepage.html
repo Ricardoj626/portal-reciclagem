@@ -13,67 +13,67 @@
 
             {% include "_messages.html" %}
             <h1>{% blocktrans %}Bem vindo ao<div style="font-size: 6rem; font-weight: 600;">Cuidado</div>{% endblocktrans %}</h1>
-            <a class="btn btn-default" href="/admin">Ir para a Área Administrativa</a>
+            <br>
 
-            <p class="lead">
-                {% blocktrans %}
-                Projeto em prol da segurança da mulher...
-                {% endblocktrans %}
-            </p>
-            {% if not user.is_authenticated %}
-            {% url "account_login" as login_url %}
-            {% url "account_signup" as signup_url %}
-            <p class="mb-5 lead">{% blocktrans %}Você pode <a href="{{ login_url }}" class="btn btn-secondary">Entrar</a> ou <a href="{{ signup_url }}" class="btn btn-primary">Criar nova conta</a> para acessar o Sistema.{% endblocktrans %}</p>
-            {% endif %}
-            <img src="http://pinaxproject.com/pinax-design/tessellations/Project%20Account.png" />
+                <br>
+                <br>
 
-        </div>
 
-    </section>
-    <section id="content-section">
-        <div id="content-body">
-            <h2 class="text-center">{% blocktrans %}Quem são os parceiros?{% endblocktrans %}</h2>
+                <div class="container text-center">
 
-            <div class="container-fluid">
-                <div class="feature-columns row">
 
-                    <div class="col">
-                        <div class="icon"><i class="fa fa-cubes fa-3x"></i></div>
-                        <div class="desc">
-                            {% blocktrans %}
-                            <b>Delegacia da Mulher</b> provide project layout,
-                            scaffolding, already integrated components and
-                            ready-to-go code.
-                            {% endblocktrans %}
+                    <div class="container-fluid">
+                        <div class="feature-columns row">
+
+                            <div class="col">
+                                <a href="#" class="btn btn-default">
+                                <div class="icon"><i style="color:#006600" class="fa fa-heartbeat fa-4x"></i></div>
+                                <div class="desc">
+                                    <b>Hospitais</b>
+
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="/pm" class="btn btn-default">
+                                <div class="icon"><i style="color:#880000" class="fa fa-taxi fa-4x"></i></div>
+                                <div class="desc">
+                                    <b>Policia Militar</b>
+
+                                </div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="/cap" class="btn btn-default">
+                                <div class="icon"><i style="color:#000077" class="fa fa-tint fa-4x"></i></div>
+                                <div class="desc">
+                                    <b>CAP</b>
+                                </div>
+                                </a>
+                            </div>
                         </div>
-                        <a href="#" class="btn btn-default">Delegacia da Mulher</a>
-                    </div>
-                    <div class="col">
-                        <div class="icon"><i class="fa fa-puzzle-piece fa-3x"></i></div>
-                        <div class="desc">
-                            {% blocktrans %}
-                            <b>Polivis Militar</b> provide common
-                            infrastructure, back-end functionality,
-                            and user-facing components.
-                            {% endblocktrans %}
-                        </div>
-                        <a href="/pm" class="btn btn-default">Policia Militar</a>
-                    </div>
-                    <div class="col">
-                        <div class="icon"><i class="fa fa-tint fa-3x"></i></div>
-                        <div class="desc">
-                            {% blocktrans %}
-                            <b>CAP</b> provide default templates and
-                            stylesheets for quick prototyping and easy customization.
-                            {% endblocktrans %}
-                        </div>
-                        <a href="/cap" class="btn btn-default">CAP</a>
                     </div>
                 </div>
-            </div>
+
+
+
+                {% if not user.is_authenticated %}
+                {% url "account_login" as login_url %}
+                {% url "account_signup" as signup_url %}
+                <p class="mb-5 lead">{% blocktrans %}Você pode <a href="{{ login_url }}" class="btn btn-secondary">Entrar</a> ou <a href="{{ signup_url }}" class="btn btn-primary">Criar nova conta</a> para acessar o Sistema.{% endblocktrans %}</p>
+                {% endif %}
+
         </div>
+
+
+
+
     </section>
-<br>
-<br>
+
+    <section id="content-section">
+
+    </section>
+    <br>
+    <br>
 </main>
 {% endblock %}
