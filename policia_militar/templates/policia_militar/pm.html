@@ -1,0 +1,99 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}pinax-project-account{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block body_base %}
+<main>
+    <section class="jumbotron">
+        <div class="container">
+            <h1>Dados disponibilizados pela Policia Militar</h1>
+            <br>
+            <h2>Ocorrências</h2>
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>Vítima</th>
+                    <th>Ambiente da agressão</th>
+                    <th>Período violência</th>
+                    <th>Autor</th>
+                    <th>Tipo de violência</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ocorrencia in ocorrencias %}
+                <tr>
+                    <td>{{ocorrencia.vitima.nome}}</td>
+                    <td>{{ ocorrencia.get_ambiente_agressao_display }}</td>
+                    <td>{{ocorrencia.get_periodo_violencia_display}}</td>
+                    <td>{{ocorrencia.autor}}</td>
+                    <td>{{ocorrencia.get_tipo_violencia_display}}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+            <br>
+            <h2>Vítimas</h2>
+
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data de nascimento</th>
+                    <th>Residência</th>
+                    <th>Idade</th>
+                    <th>Medida protetiva</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for vitima in vitimas %}
+                <tr>
+                    <td>{{ vitima.nome }}</td>
+                    <td>{{vitima.data_nascimento}}</td>
+                    <td>{{ vitima.municipio_residencia }}</td>
+                    <td>{{vitima.get_idade_display}}</td>
+                    <td>{{vitima.get_medida_protetiva_display}}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+            <br>
+            <h2>Autores</h2>
+
+            <table class="table table-dark table-striped">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Foi preso</th>
+                    <th>Possui arma</th>
+                    <th>Doença psicologica</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for agressor in agressores %}
+                <tr>
+                    <td>{{agressor.nome_autor}}</td>
+                    <td>{{ agressor.get_autor_foi_preso_display }}</td>
+                    <td>{{agressor.get_autor_arma_display}}</td>
+                    <td>{{agressor.get_autor_doenca_psicologica_display}}</td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </section>
+
+    <br>
+    <br>
+</main>
+{% endblock %}

@@ -70,7 +70,8 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_ROOT, "static"),
 ]
 
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -114,6 +115,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "sistema.urls"
@@ -193,7 +195,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 
 
-ACCOUNT_OPEN_SIGNUP = True
+ACCOUNT_OPEN_SIGNUP = False
 ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
 ACCOUNT_LOGIN_REDIRECT_URL = "home"

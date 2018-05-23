@@ -19,7 +19,7 @@ class Vitima(models.Model):
     logradouro = models.CharField(max_length=100, help_text='Informe a rua/avenida')
     telefone = models.CharField(max_length=10)
     idade = models.CharField(max_length=50, choices=CH_IDADE)
-    idade_outros = models.CharField(max_length=50, verbose_name='Caso outros:')
+    idade_outros = models.CharField(max_length=50, verbose_name='Caso outros:', blank=True, null=True)
     raca_cor = models.CharField(max_length=100, choices=CH_RACA_COR)
     medida_protetiva = models.CharField(max_length=10, verbose_name='Possui Medida Protetiva', choices=CH_SIM_NAO)
     deficiencia = MultiSelectField(verbose_name='Deficiência', choices=CH_DEFICIENCIA, help_text='Marque todas que se aplicam')
@@ -27,6 +27,7 @@ class Vitima(models.Model):
     orientacao_sexual = models.CharField(max_length=100, choices=CH_ORIENTACAO_SEXUAL, blank=True, null=True)
     instrucao = models.CharField(max_length=100, verbose_name='Instrução', choices=CH_INSTRUCAO)
     renda_individual = models.CharField(max_length=100, choices=CH_RENDA)
+    ultima_atualizacao = models.DateTimeField(auto_now=True, editable=False)
 
     def __str__(self):
         return "%s - %s" % (self.nome, self.data_nascimento)
@@ -45,7 +46,7 @@ class Agressor(models.Model):
                                       choices=CH_SIM_NAO)
     autor_arma = models.CharField(max_length=100, verbose_name='O Autor Possui Arma de Fogo ou Arma Branca',
                                   choices=CH_AUTOR_ARMA)
-
+    ultima_atualizacao = models.DateTimeField(auto_now=True, editable=False)
     def __str__(self):
         return str(self.nome_autor)
 
@@ -85,7 +86,7 @@ class Ocorrencia(models.Model):
     data_visita_vitima_medida_protetiva = models.DateField(verbose_name='Data da Visita A Vítima (Medida Protetiva)')
     numero_reds_vitima_medida_protetiva = models.CharField(max_length=20, verbose_name='Número do REDS')
     observacoes_visita_vitima_medida_protetiva = models.TextField(max_length=2000, verbose_name='Observações')
-
+    ultima_atualizacao = models.DateTimeField(auto_now=True, editable=False)
     def __str__(self):
         return "%s - %s" % (self.vitima, self.autor)
 

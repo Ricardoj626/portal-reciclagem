@@ -1,0 +1,47 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}pinax-project-account{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block body_base %}
+<main>
+    <section class="jumbotron">
+<div class="container">
+  <h2>Dados disponibilizados pelo CAP</h2>
+    <br>
+
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th>Data da ocorrência</th>
+        <th>Nome</th>
+        <th>Reincidência</th>
+        <th>Local ocorrência</th>
+        <th>Tipo de violência</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for ocorrencia in ocorrencias %}
+      <tr>
+        <td>{{ocorrencia.data_ocorrencia}}</td>
+        <td>{{ ocorrencia.nome }}</td>
+        <td>{{ocorrencia.get_reicidencia_display}}</td>
+        <td>{{ocorrencia.municipio_ocorrencia}}</td>
+        <td>{{ocorrencia.get_tipo_violencia_display}}</td>
+      </tr>
+    {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+
+
+    </section>
+
+<br>
+<br>
+</main>
+{% endblock %}

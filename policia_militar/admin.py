@@ -3,7 +3,13 @@ from django.contrib import admin
 # Register your models here.
 from .models import Ocorrencia, Vitima, Agressor
 
+
+class OcorrenciaInline(admin.StackedInline):
+    model = Ocorrencia
+    extra = 1
+
 class VitimaAdmin(admin.ModelAdmin):
+    inlines = (OcorrenciaInline,)
 
     list_display = ("data_nascimento", "nome", "telefone")
     fieldsets = (
@@ -35,9 +41,9 @@ class VitimaAdmin(admin.ModelAdmin):
 
 
     # ordering = ["-data_notificacao"]
-    # search_fields = ("data_ocorrencia", "nome", "tipo_violencia", "encaminhamento")
-    # list_filter = ("nome", "tipo_violencia", "encaminhamento")
-    # date_hierarchy = 'data_notificacao'
+    search_fields = ("nome", "municipio_residencia", "bairro", "telefone")
+    list_filter = ("nome", "bairro")
+    date_hierarchy = 'ultima_atualizacao'
 
 
     save_on_top = True
@@ -86,12 +92,14 @@ class OcorrenciaAdmin(admin.ModelAdmin):
     )
 
     # ordering = ["-data_notificacao"]
-    search_fields = ("vitima", "autor", "tipo_violencia", "natureza_ocorrencia")
+    search_fields = ("vitima__nome", "autor__nome_autor", "tipo_violencia", "natureza_ocorrencia")
     list_filter = ("vitima", "autor", "tipo_violencia")
-    # date_hierarchy = 'data_notificacao'
+    date_hierarchy = 'ultima_atualizacao'
     save_on_top = True
 
 class AgressorAdmin(admin.ModelAdmin):
+    inlines = (OcorrenciaInline,)
+
     list_display = ("nome_autor", "rg_autor", "autor_foi_preso")
     fieldsets = (
         (None, {
@@ -110,7 +118,7 @@ class AgressorAdmin(admin.ModelAdmin):
     # ordering = ["-data_notificacao"]
     search_fields = ("nome_autor", "rg_autor")
     list_filter = ("nome_autor", "autor_foi_preso")
-    # date_hierarchy = 'data_notificacao'
+    date_hierarchy = 'ultima_atualizacao'
 
 
 

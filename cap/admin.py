@@ -41,22 +41,22 @@ class OcorrenciaAdmin(admin.ModelAdmin):
                 'encaminhamento'),
             )
         }),
-        ('Dados gerais', {
-            'fields': (
-                ('tipo_notificacao',
-                'agravo_doenca'),
-                ('codigo_cid10',
-                'data_notificacao'),
-                ('uf_notificacao',
-                'municipio_notificacao'),
-                ('codigo_ibge_notificacao',
-                'unidade_notificadora'),
-                ('nome_unidade_notificadora',
-                'codigo_unidade'),
-                ('unidade_saude',
-                'codigo_cnes'),
-                       )
-        }),
+        # ('Dados gerais', {
+        #     'fields': (
+        #         ('tipo_notificacao',
+        #         'agravo_doenca'),
+        #         ('codigo_cid10',
+        #         'data_notificacao'),
+        #         ('uf_notificacao',
+        #         'municipio_notificacao'),
+        #         ('codigo_ibge_notificacao',
+        #         'unidade_notificadora'),
+        #         ('nome_unidade_notificadora',
+        #         'codigo_unidade'),
+        #         ('unidade_saude',
+        #         'codigo_cnes'),
+        #                )
+        # }),
 
         ('Notificação individual', {
             'fields': (
@@ -72,17 +72,11 @@ class OcorrenciaAdmin(admin.ModelAdmin):
         ('Dados de Residência', {
             'fields': (
                 ('uf_residencia',
-                'codigo_ibge_residencia'),
-                ('distrito',
-                'codigo'),
-                'complemento',
-                ('geo_campo1',
-                'geo_campo2'),
-                ('ponto_referencia',
-                'cep'),
-                ('telefone',
-                'zona_moradia'),
-                'pais_residencia',
+                'complemento'),
+                ('cep',
+                'telefone'),
+                ('zona_moradia',
+                'pais_residencia'),
             )
 
         }),
@@ -100,15 +94,10 @@ class OcorrenciaAdmin(admin.ModelAdmin):
 
         }),
 
-        ('Dadis da ocorrência', {
+        ('Dados da ocorrência', {
             'fields': (
                 ('uf_ocorrencia',
-                'codigo_ibge_ocorrencia'),
-                ('distrito_ocorrencia',
-                'codigo_ocorrencia'),
-                'complemento_ocorrencia',
-                ('geo_campo3',
-                'geo_campo4'),
+                'complemento_ocorrencia'),
                 ('ponto_referencia_ocorrencia',
                 'zona_ocorrencia'),
             )
@@ -136,21 +125,13 @@ class OcorrenciaAdmin(admin.ModelAdmin):
             )
 
         }),
-        ('Notificador', {
-            'fields': (
-                ('notificador_municipio_unidadesaude',
-                'notificador_codigo_unidadesaude'),
-                ('notificador_nome',
-                'notificador_funcao'),
-            )
 
-        }),
 
     )
-    ordering = ["-data_notificacao"]
+    # ordering = ["-data_notificacao"]
     search_fields = ("data_ocorrencia", "nome", "tipo_violencia", "encaminhamento")
     list_filter = ("nome", "tipo_violencia", "encaminhamento")
-    date_hierarchy = 'data_notificacao'
+    # date_hierarchy = 'data_notificacao'
 
 
     save_on_top = True
