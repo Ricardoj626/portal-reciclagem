@@ -73,39 +73,39 @@ class Ocorrencia(models.Model):
     acompanhamento_ppdv = models.CharField(max_length=10, verbose_name='Acompanhamento Pela PPVD', choices=CH_SIM_NAO)
 
 
-    data_visita_autor = models.DateField(verbose_name='Data da Visita ao Autor')
-    numero_reds_autor = models.CharField(max_length=20, verbose_name='Número do REDS')
-    observacoes_visita_autor = models.TextField(max_length=2000, verbose_name='Observações')
-    data_visita_vitima = models.DateField(verbose_name='Data da Visita A Vítima')
-    numero_reds_vitima = models.CharField(max_length=20, verbose_name='Número do REDS')
-    observacoes_visita_vitima = models.TextField(max_length=2000, verbose_name='Observações')
+    data_visita_autor = models.DateField(verbose_name='Data da Visita ao Autor', blank=True, null=True)
+    numero_reds_autor = models.CharField(max_length=20, verbose_name='Número do REDS', blank=True, null=True)
+    observacoes_visita_autor = models.TextField(max_length=2000, verbose_name='Observações', blank=True, null=True)
+    data_visita_vitima = models.DateField(verbose_name='Data da Visita A Vítima', blank=True, null=True)
+    numero_reds_vitima = models.CharField(max_length=20, verbose_name='Número do REDS', blank=True, null=True)
+    observacoes_visita_vitima = models.TextField(max_length=2000, verbose_name='Observações', blank=True, null=True)
 
-    data_visita_autor_medida_protetiva = models.DateField(verbose_name='Data da Visita ao Autor (Medida Protetiva)')
-    numero_reds_autor_medida_protetiva = models.CharField(max_length=20, verbose_name='Número do REDS')
-    observacoes_visita_autor_medida_protetiva = models.TextField(max_length=2000, verbose_name='Observações')
-    data_visita_vitima_medida_protetiva = models.DateField(verbose_name='Data da Visita A Vítima (Medida Protetiva)')
-    numero_reds_vitima_medida_protetiva = models.CharField(max_length=20, verbose_name='Número do REDS')
-    observacoes_visita_vitima_medida_protetiva = models.TextField(max_length=2000, verbose_name='Observações')
+    data_visita_autor_medida_protetiva = models.DateField(verbose_name='Data da Visita ao Autor (Medida Protetiva)', blank=True, null=True)
+    numero_reds_autor_medida_protetiva = models.CharField(max_length=20, verbose_name='Número do REDS', blank=True, null=True)
+    observacoes_visita_autor_medida_protetiva = models.TextField(max_length=2000, verbose_name='Observações', blank=True, null=True)
+    data_visita_vitima_medida_protetiva = models.DateField(verbose_name='Data da Visita A Vítima (Medida Protetiva)', blank=True, null=True)
+    numero_reds_vitima_medida_protetiva = models.CharField(max_length=20, verbose_name='Número do REDS', blank=True, null=True)
+    observacoes_visita_vitima_medida_protetiva = models.TextField(max_length=2000, verbose_name='Observações', blank=True, null=True)
     ultima_atualizacao = models.DateTimeField(auto_now=True, editable=False)
     def __str__(self):
         return "%s - %s" % (self.vitima, self.autor)
 
 
-def post_save_relatorio_receiver(sender, instance, *args, **kwargs):
-    destinatario = "ricardoj@gec.inatel.br"
-    remetente = "ricardoj@gec.inatel.br"
-
-    try:
-        subject = 'Novo Servico para Faturamento - %s : %s - %s %s (%s)' % (
-            instance.tipo.servico, instance.id_behive, instance.link, instance.data_envio_pacote,
-            instance.cliente.username)
-        msg = get_template('outros/email_template.html').render({'relatorio': instance})
-        email = EmailMessage(subject, msg, to=[destinatario, ], from_email=remetente)
-        email.content_subtype = 'html'
-        email.send()
-
-        instance.check_financeiro = True
-        instance.save()
-    except:
-        pass
-post_save.connect(post_save_relatorio_receiver, sender=Ocorrencia)
+# def post_save_relatorio_receiver(sender, instance, *args, **kwargs):
+#     destinatario = "ricardoj@gec.inatel.br"
+#     remetente = "ricardoj@gec.inatel.br"
+#
+#     try:
+#         subject = 'Novo Servico para Faturamento - %s : %s - %s %s (%s)' % (
+#             instance.tipo.servico, instance.id_behive, instance.link, instance.data_envio_pacote,
+#             instance.cliente.username)
+#         msg = get_template('outros/email_template.html').render({'relatorio': instance})
+#         email = EmailMessage(subject, msg, to=[destinatario, ], from_email=remetente)
+#         email.content_subtype = 'html'
+#         email.send()
+#
+#         instance.check_financeiro = True
+#         instance.save()
+#     except:
+#         pass
+# post_save.connect(post_save_relatorio_receiver, sender=Ocorrencia)

@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Ocorrencia
+from .models import Ocorrencia, Observacoes
+
+
 # Register your models here.
 
 class OcorrenciaAdmin(admin.ModelAdmin):
@@ -137,6 +139,7 @@ class OcorrenciaAdmin(admin.ModelAdmin):
     save_on_top = True
 
 admin.site.register(Ocorrencia, OcorrenciaAdmin)
+admin.site.register(Observacoes)
 
 
 

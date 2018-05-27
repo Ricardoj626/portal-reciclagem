@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -122,25 +123,51 @@ class Ocorrencia(models.Model):
         return "%s - %s" % (self.nome, self.data_ocorrencia)
 
 
-def post_save_relatorio_receiver(sender, instance, *args, **kwargs):
-    destinatario = "ricardoj@gec.inatel.br"
-    remetente = "ricardoj@gec.inatel.br"
+class Observacoes(models.Model):
+    ocorrencia = models.ForeignKey(Ocorrencia, on_delete='cascade')
+    texto = models.TextField(max_length=2000)
+    data = models.DateTimeField(auto_now=True, editable=False)
+    criador = models.ForeignKey(User, on_delete='cascade')
 
-    try:
-        subject = 'Novo Servico para Faturamento - %s : %s - %s %s (%s)' % (
-            instance.tipo.servico, instance.id_behive, instance.link, instance.data_envio_pacote,
-            instance.cliente.username)
-        msg = get_template('outros/email_template.html').render({'relatorio': instance})
-        email = EmailMessage(subject, msg, to=[destinatario, ], from_email=remetente)
-        email.content_subtype = 'html'
-        email.send()
+    def __str__(self):
+        return "%s (%s)" % (self.ocorrencia, self.criador)
 
-        # from financeiro.models import Financeiro
-        # f = Financeiro.objects.create(relatorio=instance, )
-        # print(f)
+    class Meta:
+        verbose_name = "Observação"
+        verbose_name_plural = "Observações"
 
-        instance.check_financeiro = True
-        instance.save()
-    except:
-        pass
-post_save.connect(post_save_relatorio_receiver, sender=Ocorrencia)
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def post_save_relatorio_receiver(sender, instance, *args, **kwargs):
+#     destinatario = "ricardoj@gec.inatel.br"
+#     remetente = "ricardoj@gec.inatel.br"
+#
+#     try:
+#         subject = 'Novo Servico para Faturamento - %s : %s - %s %s (%s)' % (
+#             instance.tipo.servico, instance.id_behive, instance.link, instance.data_envio_pacote,
+#             instance.cliente.username)
+#         msg = get_template('outros/email_template.html').render({'relatorio': instance})
+#         email = EmailMessage(subject, msg, to=[destinatario, ], from_email=remetente)
+#         email.content_subtype = 'html'
+#         email.send()
+#
+#         # from financeiro.models import Financeiro
+#         # f = Financeiro.objects.create(relatorio=instance, )
+#         # print(f)
+#
+#         instance.check_financeiro = True
+#         instance.save()
+#     except:
+#         pass
+# post_save.connect(post_save_relatorio_receiver, sender=Ocorrencia)

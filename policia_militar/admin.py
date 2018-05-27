@@ -6,7 +6,7 @@ from .models import Ocorrencia, Vitima, Agressor
 
 class OcorrenciaInline(admin.StackedInline):
     model = Ocorrencia
-    extra = 1
+    extra = 0
 
 class VitimaAdmin(admin.ModelAdmin):
     inlines = (OcorrenciaInline,)
