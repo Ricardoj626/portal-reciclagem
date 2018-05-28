@@ -1,3 +1,6 @@
+import json
+
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -34,12 +37,16 @@ class Cap_View(View):
 def Observacoes_View(request, pk):
     # ocorrencia = get_object_or_404(Ocorrencia, pk=pk)
     ocorrencia = Ocorrencia.objects.all()
+    print(ocorrencia)
 
-    # observacoes = Observacoes.objects.filter(ocorrencia=pk)
+    observacoes = Observacoes.objects.filter(ocorrencia=pk)
+    print(observacoes)
 
     params = {
         "ocorrencia": ocorrencia,
 
-        # "observacoes": observacoes,
+        "observacoes": observacoes,
     }
-    return render(request, 'cap/cap.html', params)
+
+
+    return HttpResponse(params)
