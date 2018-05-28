@@ -130,3 +130,9 @@ class AgressorAdmin(admin.ModelAdmin):
 admin.site.register(Agressor, AgressorAdmin)
 admin.site.register(Vitima, VitimaAdmin)
 admin.site.register(Ocorrencia, OcorrenciaAdmin)
+
+
+
+admin.site.site_header = u"Painel Administrativo"
+admin.site.index_title = u"Cuidado"
+admin.site.site_title = u"Admin"
