@@ -144,8 +144,10 @@ INSTALLED_APPS = [
 
     # project
     "sistema",
-    "cap",
-    "policia_militar"
+    "cooperativa",
+    "industria",
+    "autonomo"
+
 
 ]
 
