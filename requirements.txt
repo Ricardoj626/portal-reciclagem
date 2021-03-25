@@ -22,7 +22,7 @@ pinax-eventlog==2.0.3
 pinax-templates==2.0.1
 pinax-webanalytics==4.0.2
 pytz==2018.4
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.4
 tablib==0.12.1
 unicodecsv==0.14.1
